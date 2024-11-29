@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-lx1#niobsplfoe_*s4*%2=^7u(i56*2x0eha3lea2k%2@wi((+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['codeak.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog.apps.BlogConfig',
+    'social_django',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -139,4 +141,14 @@ MEDIA_URL = '/media/'
 AUTHENTICATION_BACKENDS = [
 'django.contrib.auth.backends.ModelBackend',
 'registration.authentication.EmailAuthBackend',
+'social_core.backends.twitter.TwitterOAuth',
+'social_core.backends.google.GoogleOAuth2',
 ]
+
+SOCIAL_AUTH_TWITTER_KEY = '1'
+SOCIAL_AUTH_TWITTER_SECRET = '2'
+# client id = 3
+# client secret = 4
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '4'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '4'

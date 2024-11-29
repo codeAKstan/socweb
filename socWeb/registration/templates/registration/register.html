@@ -14,6 +14,8 @@
         {{ form.as_p }}
         <button type="submit">Register</button>
         <p>Have an account? <a href="{% url 'login' %}">Login</a></p>
+        <p>OR</p>
+        <p><a href="{% url 'social:begin' 'googl-oauth2' %}">Login with google</a></p>
 
     </form>
 </body>
