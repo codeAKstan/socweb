@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -145,10 +146,22 @@ AUTHENTICATION_BACKENDS = [
 'social_core.backends.google.GoogleOAuth2',
 ]
 
-SOCIAL_AUTH_TWITTER_KEY = '1'
-SOCIAL_AUTH_TWITTER_SECRET = '2'
-# client id = 3
-# client secret = 4
+SOCIAL_AUTH_TWITTER_KEY = config('SOCIAL_AUTH_TWITTER_KEY')
+SOCIAL_AUTH_TWITTER_SECRET = config('SOCIAL_AUTH_TWITTER_SECRET')
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '4'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '4'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
+
+# creating a profile object for users created via social auth
+SOCIAL_AUTH_PIPELINE = [
+'social_core.pipeline.social_auth.social_details',
+'social_core.pipeline.social_auth.social_uid',
+'social_core.pipeline.social_auth.auth_allowed',
+'social_core.pipeline.social_auth.social_user',
+'social_core.pipeline.user.get_username',
+'social_core.pipeline.user.create_user',
+'registration.authentication.create_profile',
+'social_core.pipeline.social_auth.associate_user',
+'social_core.pipeline.social_auth.load_extra_data',
+'social_core.pipeline.user.user_details',
+]
